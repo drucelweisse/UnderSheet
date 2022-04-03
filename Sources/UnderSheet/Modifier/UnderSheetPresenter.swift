@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct UnderSheetPresenter: ViewModifier {
+struct UnderSheetPresenterModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlayPreferenceValue(UnderSheetStoragePreferenceKey.self, { storage in
@@ -16,6 +16,7 @@ struct UnderSheetPresenter: ViewModifier {
                     storage.view
                         .background(Color(UIColor.systemBackground))
                         .ignoresSafeArea()
+                        .frame(maxHeight: .infinity, alignment: .bottom)
                         .transition(.move(edge: .bottom))
                 }
             })
@@ -26,6 +27,6 @@ struct UnderSheetPresenter: ViewModifier {
 
 public extension View  {
     func underSheetPresenter() -> some View {
-        modifier(UnderSheetPresenter())
+        modifier(UnderSheetPresenterModifier())
     }
 }
