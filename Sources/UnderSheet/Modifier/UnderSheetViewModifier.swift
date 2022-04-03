@@ -13,14 +13,14 @@ public struct UnderSheetPresentationModifier<SheetContent: View>: ViewModifier  
     
     let sheetContent: SheetContent
     
-    public init(isPresented: Bool, content: SheetContent) {
+    public init(isPresented: Binding<Bool>, content: SheetContent) {
         self._isPresented = isPresented
         sheetContent = content
     }
     
     public func body(content: Content) -> some View {
         content
-            .preference(key: UnderSheetStoragePreferenceKey.self, value: isPresented ? .init(view: sheetContent) : nil)
+            .preference(key: UnderSheetStoragePreferenceKey.self, value: isPresented ? [.init(view: sheetContent)] : [])
     }
 }
 

@@ -23,7 +23,7 @@ struct UnderSheetStorage: Equatable {
 }
 
 struct UnderSheetStoragePreferenceKey: PreferenceKey {
-    static var defaultValue: [UnderSheetStorage]
+    static var defaultValue: [UnderSheetStorage] = []
     static func reduce(value: inout [UnderSheetStorage], nextValue: () -> [UnderSheetStorage]) {
         value.append(contentsOf: nextValue())
     }
