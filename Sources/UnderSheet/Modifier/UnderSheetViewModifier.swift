@@ -26,7 +26,7 @@ public struct UnderSheetPresentationModifier<SheetContent: View>: ViewModifier  
 
 
 public extension View {
-    func underSheet<Content: View>(isPresented: Bool, @ViewBuilder content: @escaping () -> Content) -> some View {
+    func underSheet<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
         modifier(UnderSheetPresentationModifier(isPresented: isPresented, content: content()))
     }
 }
