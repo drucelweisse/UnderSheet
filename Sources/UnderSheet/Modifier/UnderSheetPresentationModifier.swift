@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct UnderSheetPresentationModifier<SheetContent: View>: ViewModifier  {
+struct UnderSheetPresentationModifier<SheetContent: View>: ViewModifier  {
     
     @Binding var isPresented: Bool
     
