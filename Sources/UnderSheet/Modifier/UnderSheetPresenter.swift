@@ -12,13 +12,16 @@ struct UnderSheetPresenterModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlayPreferenceValue(UnderSheetStoragePreferenceKey.self, { storage in
-                if let storage = storage.first {
-                    storage.view
-                        .background(Color(UIColor.systemBackground))
-                        .ignoresSafeArea()
-                        .frame(maxHeight: .infinity, alignment: .bottom)
-                        .transition(.move(edge: .bottom))
+                VStack {
+                    if let stored = storage.first {
+                        storage.view
+                            .background(Color(UIColor.systemBackground))
+                            .ignoresSafeArea()
+                            .frame(maxHeight: .infinity, alignment: .bottom)
+                            .transition(.move(edge: .bottom))
+                    }
                 }
+
             })
         
     }
