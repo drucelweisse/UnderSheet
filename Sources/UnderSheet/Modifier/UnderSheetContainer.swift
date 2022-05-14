@@ -20,6 +20,7 @@ struct ResizableUnderSheetContainer<Content: View>: View {
         .coordinateSpace(name: "ResizableUnderSheet")
         .frame(width: proxy.size.width)
         .frame(height: max(frameHeight(index: selectedDetentIndex, height: proxy.size.height, translation: yTranslation), 0))
+        .background(background)
         .contentShape(Rectangle())
         .gesture(dragGesture(proxy: proxy))
         .animation(
@@ -32,6 +33,7 @@ struct ResizableUnderSheetContainer<Content: View>: View {
         )
       
         .frame(maxHeight: .infinity, alignment: .bottom)
+        .frame(maxWidth: .infinity)
         .transition(.move(edge: .bottom))
         .zIndex(1)
     }
@@ -78,7 +80,12 @@ private extension ResizableUnderSheetContainer {
   }
   
   
-  
+  var background: some View {
+      VStack(spacing: 0) {
+          Color(UIColor.systemBackground)
+      }
+      .ignoresSafeArea(.all, edges: .bottom)
+  }
   
   func sheetHeight(index: Int, height: CGFloat) -> CGFloat {
     height * detents[index].heightRatio
