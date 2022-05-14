@@ -11,7 +11,7 @@ struct UnderSheetItemPresentationModifier<V: Identifiable, SheetContent: View>: 
   
   @Binding
   var item: V?
-  
+  let detents: [UnderSheetDetent]
   let sheetContent: (V) -> SheetContent
   
   @ViewBuilder
@@ -31,13 +31,13 @@ struct UnderSheetItemPresentationModifier<V: Identifiable, SheetContent: View>: 
       })
     
     content
-      .modifier(UnderSheetPresentationModifier(isPresented: isPresented, content: sheetContent))
+      .modifier(UnderSheetPresentationModifier(isPresented: isPresented, detents: detents, content: sheetContent))
   }
 }
 
 
 public extension View {
-  func underSheet<V: Identifiable, Content: View>(item: Binding<V?>, @ViewBuilder content: @escaping (V) -> Content) -> some View {
-    modifier(UnderSheetItemPresentationModifier(item: item, sheetContent: content))
+  func underSheet<V: Identifiable, Content: View>(item: Binding<V?>, detents: [UnderSheetDetent], @ViewBuilder content: @escaping (V) -> Content) -> some View {
+    modifier(UnderSheetItemPresentationModifier(item: item, detents: detents, sheetContent: content))
   }
 }
