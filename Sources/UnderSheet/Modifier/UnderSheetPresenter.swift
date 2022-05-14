@@ -11,10 +11,10 @@ import SwiftUI
 struct UnderSheetPresenterModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .overlayPreferenceValue(UnderSheetStoragePreferenceKey.self, { storage in
+        .overlayPreferenceValue(UnderSheetStorage.Key.self, { storage in
                 VStack {
                     if let stored = storage.first {
-                        storage.view
+                        stored.view
                             .background(Color(UIColor.systemBackground))
                             .ignoresSafeArea()
                             .frame(maxHeight: .infinity, alignment: .bottom)

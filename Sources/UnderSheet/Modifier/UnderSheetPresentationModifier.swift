@@ -20,7 +20,7 @@ struct UnderSheetPresentationModifier<SheetContent: View>: ViewModifier  {
     
     public func body(content: Content) -> some View {
         content
-            .preference(key: UnderSheetStoragePreferenceKey.self, value: isPresented ? [.init(view: sheetContent)] : [])
+        .preference(key: UnderSheetStorage.Key.self, value: isPresented ? [.init(view: sheetContent)] : [])
     }
 }
 

@@ -21,7 +21,7 @@ struct ResizableUnderSheetContainer<Content: View, Grabber: View>: View {
             content
                 .coordinateSpace(name: "ResizeableUnderSheet")
                 .frame(width: proxy.size.width)
-                .frame(height: max(frameHeight(index: selectedDetentIndex, height: proxy.size.height, translation: translation), 0))
+                .frame(height: max(frameHeight(index: selectedDetentIndex, height: proxy.size.height, translation: yTranslation), 0))
                 .contentShape(Rectangle())
                 .gesture(dragGesture(proxy: proxy))
                 .animation(
@@ -43,7 +43,7 @@ struct ResizableUnderSheetContainer<Content: View, Grabber: View>: View {
 private extension ResizableUnderSheetContainer {
     
     func dragGesture(proxy: GeometryProxy) -> some Gesture {
-        DragGesture(minimumDistance: 0, coordinateSpace: .named("ResizeableUnderSheet"))
+        DragGesture(coordinateSpace: .named("ResizeableUnderSheet"))
             .updating($yTranslation, body: { value, state, transaction in
                 state = value.translation.height
             })
