@@ -31,8 +31,9 @@ struct ResizableUnderSheetContainer<Content: View>: View {
           ),
           value: yTranslation
         )
+        .frame(maxHeight: .infinity, alignment: .bottom)
     }
-    .frame(maxHeight: .infinity, alignment: .bottom)
+
     .frame(maxWidth: .infinity)
     .transition(.move(edge: .bottom))
     .zIndex(1)
