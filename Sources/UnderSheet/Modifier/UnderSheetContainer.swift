@@ -17,12 +17,13 @@ struct ResizableUnderSheetContainer<Content: View>: View {
   var body: some View {
     GeometryReader { proxy in
       content
-        .coordinateSpace(name: "ResizableUnderSheet")
         .frame(width: proxy.size.width)
         .frame(height: max(frameHeight(index: selectedDetentIndex, height: proxy.size.height, translation: yTranslation), 0), alignment: .top)
         .background(background)
         .contentShape(Rectangle())
         .gesture(dragGesture(proxy: proxy))
+        .compositingGroup()
+        .shadow(color: Color(UIColor.black), radius: 2, x: 0, y: -2)
         .animation(
           .interactiveSpring(
             response: 0.45,
@@ -43,7 +44,7 @@ struct ResizableUnderSheetContainer<Content: View>: View {
 private extension ResizableUnderSheetContainer {
   
   func dragGesture(proxy: GeometryProxy) -> some Gesture {
-    DragGesture(coordinateSpace: .named("ResizableUnderSheet"))
+    DragGesture()
       .updating($yTranslation, body: { value, state, transaction in
         state = value.translation.height
       })
