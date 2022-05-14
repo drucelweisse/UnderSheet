@@ -19,7 +19,7 @@ struct ResizableUnderSheetContainer<Content: View>: View {
       content
         .coordinateSpace(name: "ResizableUnderSheet")
         .frame(width: proxy.size.width)
-        .frame(height: max(frameHeight(index: selectedDetentIndex, height: proxy.size.height, translation: yTranslation), 0))
+        .frame(height: max(frameHeight(index: selectedDetentIndex, height: proxy.size.height, translation: yTranslation), 0), alignment: .top)
         .background(background)
         .contentShape(Rectangle())
         .gesture(dragGesture(proxy: proxy))
@@ -31,12 +31,11 @@ struct ResizableUnderSheetContainer<Content: View>: View {
           ),
           value: yTranslation
         )
-      
-        .frame(maxHeight: .infinity, alignment: .bottom)
-        .frame(maxWidth: .infinity)
-        .transition(.move(edge: .bottom))
-        .zIndex(1)
     }
+    .frame(maxHeight: .infinity, alignment: .bottom)
+    .frame(maxWidth: .infinity)
+    .transition(.move(edge: .bottom))
+    .zIndex(1)
   }
 }
 
